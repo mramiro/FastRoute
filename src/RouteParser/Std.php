@@ -36,7 +36,7 @@ REGEX;
         }
 
         $currentRoute = '';
-        $routeDatas = [];
+        $routeDatas = array();
         foreach ($segments as $n => $segment) {
             if ($segment === '' && $n !== 0) {
                 throw new BadRouteException("Empty optional part");
@@ -60,7 +60,7 @@ REGEX;
         }
 
         $offset = 0;
-        $routeData = [];
+        $routeData = array();
         foreach ($matches as $set) {
             if ($set[0][1] > $offset) {
                 $routeData[] = substr($route, $offset, $set[0][1] - $offset);
