@@ -225,7 +225,7 @@ abstract class DispatcherTest extends \PHPUnit_Framework_TestCase {
         $method = 'HEAD';
         $uri = '/user/rdlowrey';
         $handler = 'handler0';
-        $argDict = ('name' => 'rdlowrey');
+        $argDict = array('name' => 'rdlowrey');
 
         $cases[] = array($method, $uri, $callback, $handler, $argDict);
 
@@ -309,8 +309,8 @@ abstract class DispatcherTest extends \PHPUnit_Framework_TestCase {
 
         $callback = function(RouteCollector $r) {
             $r->addRoute(array('GET', 'POST'), '/user', 'handlerGetPost');
-            $r->addRoute(['DELETE'], '/user', 'handlerDelete');
-            $r->addRoute([], '/user', 'handlerNone');
+            $r->addRoute(array('DELETE'), '/user', 'handlerDelete');
+            $r->addRoute(array(), '/user', 'handlerNone');
         };
 
         $argDict = array();
@@ -325,7 +325,7 @@ abstract class DispatcherTest extends \PHPUnit_Framework_TestCase {
             $r->addRoute('GET', '/{entity}.json', 'handler1');
         };
 
-        $cases[] = array('GET', '/user.json', $callback, 'handler1', ['entity' => 'user']);
+        $cases[] = array('GET', '/user.json', $callback, 'handler1', array('entity' => 'user'));
 
         // 16 ----
 
@@ -342,7 +342,7 @@ abstract class DispatcherTest extends \PHPUnit_Framework_TestCase {
             $r->addRoute('GET', '/b/{foo}', 'handler1');
         };
 
-        $cases[] = array('HEAD', '/b/bar', $callback, 'handler1', ['foo' => 'bar']);
+        $cases[] = array('HEAD', '/b/bar', $callback, 'handler1', array('foo' => 'bar'));
 
         // 18 ----
 
@@ -486,7 +486,7 @@ abstract class DispatcherTest extends \PHPUnit_Framework_TestCase {
 
         $method = 'POST';
         $uri = '/resource/123/456';
-        $allowedMethods = ['GET'];
+        $allowedMethods = array('GET');
 
         $cases[] = array($method, $uri, $callback, $allowedMethods);
 
@@ -538,8 +538,8 @@ abstract class DispatcherTest extends \PHPUnit_Framework_TestCase {
 
         $callback = function(RouteCollector $r) {
             $r->addRoute(array('GET', 'POST'), '/user', 'handlerGetPost');
-            $r->addRoute(['DELETE'], '/user', 'handlerDelete');
-            $r->addRoute([], '/user', 'handlerNone');
+            $r->addRoute(array('DELETE'), '/user', 'handlerDelete');
+            $r->addRoute(array(), '/user', 'handlerNone');
         };
 
         $cases[] = array('PUT', '/user', $callback, array('GET', 'POST', 'DELETE'));
